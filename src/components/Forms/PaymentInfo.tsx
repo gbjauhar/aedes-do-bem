@@ -1,14 +1,11 @@
 import { Column, ContainerForm, Input, Label, MockPic, PaymentContainer, Row, Title } from "./style"
-import { Form } from "../../pages/Checkout"
-import { ChangeEvent, useState } from "react"
+import { useState } from "react"
 
-const PaymentInfo = ({ setForm, form }: { form: Form, setForm: React.Dispatch<React.SetStateAction<Form>> }) => {
+const PaymentInfo = () => {
 
   const [type, setType] = useState('pix')
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setForm({...form, [e.target.name]: e.target.value})
-  }
+
 
   return (
     <ContainerForm style={{alignItems: 'center'}}>
