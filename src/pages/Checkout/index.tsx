@@ -18,6 +18,7 @@ import { useState } from "react"
 import AddressInfo from "../../components/Forms/AddressInfo"
 import PaymentInfo from "../../components/Forms/PaymentInfo"
 import HeaderComponent from "../../components/HeaderComponent"
+import { postUser } from "../../api/users"
 
 export interface Form {
   city: string,
@@ -49,10 +50,17 @@ const Checkout = () => {
     email: '',
     cpf: ''
   })
+
+  const sendInfo = async () => {
+    await postUser(form).then(res => console.log(res)).catch(err => console.log(err))
+  }
   
   const nextPage = () => {
     if(page === 1) setPage(2)
     if(page === 2) setPage(3)
+    if(page === 3) {
+      sendInfo()
+    }
   }
 
   return(

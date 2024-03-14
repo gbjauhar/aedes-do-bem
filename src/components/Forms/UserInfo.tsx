@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react"
 import { Form } from "../../pages/Checkout"
 import { Button, ContainerForm, Input, Label, Row } from "./style"
-import { postUsers } from "../../api/users"
+import { getShipping } from "../../api/users"
 
 interface Props {
    form: Form,
@@ -23,8 +23,8 @@ const UserInfo = ({ setForm, form, setShipping, setPrices, prices, count }: Prop
     setForm({...form, [e.target.name]: e.target.value})
   }
 
-  const getShipping = async () => {
-    await postUsers(cep)
+  const getShippingAPI = async () => {
+    await getShipping(cep)
       .then(res => {
         setShipping(res.custom_price)
         setPrices({...prices, total: (count * 299) + Number(res.custom_price)})
@@ -71,7 +71,7 @@ const UserInfo = ({ setForm, form, setShipping, setPrices, prices, count }: Prop
         value={cep}
         name="cep"
       />
-      <Button onClick={getShipping}>Calcular</Button>
+      <Button onClick={getShippingAPI}>Calcular</Button>
       </Row>
       </ContainerForm>
   )
