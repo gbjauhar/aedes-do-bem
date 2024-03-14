@@ -74,3 +74,16 @@ export const MockPic = styled.div`
   box-shadow: 0px 0px 4px 0px #00000040;
   border-radius: 0.625rem;
 `
+
+export const Button = styled.button`
+  width: 7.188rem;
+  height: 2.438rem;
+  background-color: #028352;
+  border-radius: 0.125rem;
+  border: 1px solid #38BD4A;
+  font-size: 0.875rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  color: #FFFFFF;
+  cursor: pointer;
+`

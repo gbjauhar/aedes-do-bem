@@ -29,11 +29,17 @@ export const ContainerInfo = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 5rem;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
 `
 
 
 
-export const Product = styled.div`
+export const Product = styled.div<{page: number}>`
   width: 20rem;
   height: 10rem;
   border: 1px solid #D3D3D3;
@@ -44,6 +50,10 @@ export const Product = styled.div`
   padding: 0.5rem;
   box-sizing: border-box;
   gap: 0.8rem;
+  @media (max-width: 800px) {
+    margin-bottom: 2rem;
+    display: ${props => props.page === 2 || props.page === 3 ? 'none' : 'flex'};
+  }
 `
 
 export const BackgroundImage = styled.div`

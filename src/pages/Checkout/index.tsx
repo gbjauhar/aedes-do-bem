@@ -6,19 +6,18 @@ import
     Container, 
     ContainerInfo,
     Divisor,
-    Header,
     Input,
     InputContainer,
     Product,
     ProductResume,
     Row,
     Title } from "./style"
-import logo from "../../assets/logo.png"
 import box from "../../assets/caixa.png"
 import UserInfo from "../../components/Forms/UserInfo"
 import { useState } from "react"
 import AddressInfo from "../../components/Forms/AddressInfo"
 import PaymentInfo from "../../components/Forms/PaymentInfo"
+import HeaderComponent from "../../components/HeaderComponent"
 
 export interface Form {
   city: string,
@@ -36,6 +35,8 @@ export interface Form {
 const Checkout = () => {
   const [count, setCount] = useState(1)
   const [page, setPage] = useState(1)
+  const [shipping, setShipping] = useState('0.00')
+  const [prices, setPrices] = useState({ priceProducts: 299, total: 299})
   const [form, setForm] = useState<Form>({
     city: '',
     neighbourhood: '',
@@ -52,23 +53,27 @@ const Checkout = () => {
   const nextPage = () => {
     if(page === 1) setPage(2)
     if(page === 2) setPage(3)
-    console.log(form)
   }
-
 
   return(
     <Container>
-    <Header><img src={logo}/></Header>
+    <HeaderComponent />
     <ContainerInfo>
-    <Product>
+    <Product page={page}>
       <Column style={{width: '7rem'}}>
       <BackgroundImage>
         <img src={box}/>
         </BackgroundImage>
         <InputContainer>
-        <Button disabled={count === 0} onClick={() => setCount(count -1)}>-</Button>
+        <Button disabled={count === 0} onClick={() => {
+          setCount(count -1)
+          setPrices({total: ((count -1)  * 299) + Number(shipping), priceProducts: (count -1) * 299})
+        }}>-</Button>
         <Input onChange={(e) => setCount(Number(e.target.value))}value={count} />
-        <Button onClick={() => setCount(count + 1)}>+</Button></InputContainer>
+        <Button onClick={() => {
+          setCount(count +1)
+          setPrices({total: ((count +1)  * 299) + Number(shipping), priceProducts: (count +1) * 299})
+        }}>+</Button></InputContainer>
       </Column>
       <Column style={{gap: '1rem'}}>
         <Title style={{color: '#028352'}}>Caixa única</Title>
@@ -76,22 +81,22 @@ const Checkout = () => {
         <Title style={{color: '#028352', fontSize: '1.125rem'}}>R$299,00</Title>
       </Column></Product>
       <Column>
-      {page === 1 ? <UserInfo setForm={setForm} form={form}/> : page === 2 ? <AddressInfo setForm={setForm} form={form}/> : <PaymentInfo />}
+      {page === 1 ? <UserInfo setPrices={setPrices} prices={prices} count={count} setShipping={setShipping} setForm={setForm} form={form}/> : page === 2 ? <AddressInfo setForm={setForm} form={form}/> : <PaymentInfo />}
    
    <ProductResume>
     <Title>Resumo do pedido</Title>
     <Row>
       <Title>Produto ({count})</Title>
-      <Title style={{color: "#028352"}}>R$ {count * 299},00</Title>
+      <Title style={{color: "#028352"}}>R$ {prices.priceProducts},00</Title>
     </Row>
     <Row>
       <Title>Frete</Title>
-      <Title style={{color: "#028352"}}>R$ 299,00</Title>
+      <Title style={{color: "#028352"}}>R$ {shipping}</Title>
     </Row>
     <Divisor />
     <Row>
       <Title>Total</Title>
-      <Title style={{fontSize: '1.125rem', color: "#028352"}}>R$ 299,00</Title>
+      <Title style={{fontSize: '1.125rem', color: "#028352"}}>R$ {prices.total}</Title>
     </Row>
     <ButtonNext onClick={nextPage}>Continuar</ButtonNext>
    </ProductResume>

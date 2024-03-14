@@ -1,10 +1,35 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, useState } from "react"
 import { Form } from "../../pages/Checkout"
-import { ContainerForm, Input, Label } from "./style"
+import { Button, ContainerForm, Input, Label, Row } from "./style"
+import { postUsers } from "../../api/users"
 
-const UserInfo = ({ setForm, form }: { form: Form, setForm: React.Dispatch<React.SetStateAction<Form>> }) => {
+interface Props {
+   form: Form,
+   setForm: React.Dispatch<React.SetStateAction<Form>>,
+   setPrices: React.Dispatch<React.SetStateAction<{
+    total: number,
+    priceProducts: number
+   }>>,
+   prices: {
+    total: number,
+    priceProducts: number
+   },
+   count: number,
+   setShipping: React.Dispatch<React.SetStateAction<string>>,
+}
+const UserInfo = ({ setForm, form, setShipping, setPrices, prices, count }: Props) => {
+  const [cep, setCep] = useState('')
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({...form, [e.target.name]: e.target.value})
+  }
+
+  const getShipping = async () => {
+    await postUsers(cep)
+      .then(res => {
+        setShipping(res.custom_price)
+        setPrices({...prices, total: (count * 299) + Number(res.custom_price)})
+      })
+      .catch(err => console.log(err))
   }
   return (
     <ContainerForm>
@@ -39,7 +64,15 @@ const UserInfo = ({ setForm, form }: { form: Form, setForm: React.Dispatch<React
         type="email"
       />
       <Label style={{marginTop: '2rem'}}>Digite seu CEP para calcular o frete</Label>
-      <Input placeholder="José Carlos da Silva" />
+      <Row>
+      <Input
+        style={{width: '11.625rem'}}
+        onChange={(e) => setCep(e.target.value)}
+        value={cep}
+        name="cep"
+      />
+      <Button onClick={getShipping}>Calcular</Button>
+      </Row>
       </ContainerForm>
   )
 }
