@@ -1,7 +1,19 @@
+import styled from "styled-components";
+import HeaderComponent from "../../components/HeaderComponent";
+
 const Home = () => {
   return (
-    <div>teste</div>
-  )
-}
+    <Container>
+      <HeaderComponent BannerBox={true} />
+      teste
+    </Container>
+  );
+};
 
-export default Home
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export default Home;
