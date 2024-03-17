@@ -21,7 +21,7 @@ const Home = () => {
       <Content>
         <Title>É o mosquito combatendo o mosquito!</Title>
         <Title style={{fontSize: '1.5rem', color: '#4DB358'}}>Uma solução inovadora, segura e altamente eficaz no combate ao Aedes aegypti.</Title>
-        <Video width={700} controls>
+        <Video width={700} autoPlay controls muted>
           <source src={import.meta.env.VITE_FRONTEND_URL + '/video.MP4'} type="video/mp4" />
           Your browser does not support the video tag.
         </Video>

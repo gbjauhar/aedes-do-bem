@@ -9,8 +9,8 @@ type HeaderComponentProps = {
 
 const HeaderComponent: React.FC<HeaderComponentProps> = ({ BannerBox }) => {
   return (
-    <Header>
-      <HeaderBox>
+    <Header bannerBox={BannerBox}>
+      <HeaderBox bannerBox={BannerBox}>
         <Logo src={logo} />
         {BannerBox && <CaixasBanner src={caixasBanner} />}
       </HeaderBox>
@@ -48,11 +48,11 @@ const CaixasBanner = styled.img`
   @media (max-width: 500px) {
     position: initial;
     margin-left: -3rem;
-    width: 200px;
+    width: 250px;
     height: 196px;
   }
 `;
-const Header = styled.div`
+const Header = styled.div<{bannerBox?: boolean}>`
   background-color: #028352;
   width: 100%;
   min-height: 284px;
@@ -60,8 +60,13 @@ const Header = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  @media (max-width: 800px){
+    border-radius: 0 0 180px 70px;
+    height: ${props => props.bannerBox ? '200px' : ''};
+    min-height: ${props => props.bannerBox ? '' : '220px'};
+  }
 `;
-const HeaderBox = styled.div`
+const HeaderBox = styled.div<{bannerBox?: boolean}>`
   background-color: #4db358;
   width: 100%;
   min-height: 234px;
@@ -69,4 +74,9 @@ const HeaderBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 800px){
+    border-radius: 0 0 180px 70px;
+    height: ${props => props.bannerBox ? '80px' : ''};
+    min-height: ${props => props.bannerBox ? '' : '180px'};
+  }
 `;
