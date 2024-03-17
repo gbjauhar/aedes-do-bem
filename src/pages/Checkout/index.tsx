@@ -77,7 +77,10 @@ const Checkout = () => {
           setCount(count -1)
           setPrices({total: ((count -1)  * 299) + Number(shipping), priceProducts: (count -1) * 299})
         }}>-</Button>
-        <Input onChange={(e) => setCount(Number(e.target.value))}value={count} />
+        <Input onChange={(e) => {
+          setCount(Number(e.target.value))
+          setPrices({total: (Number(e.target.value)  * 299) + Number(shipping), priceProducts: Number(e.target.value) * 299})
+        }} value={count} />
         <Button onClick={() => {
           setCount(count +1)
           setPrices({total: ((count +1)  * 299) + Number(shipping), priceProducts: (count +1) * 299})
