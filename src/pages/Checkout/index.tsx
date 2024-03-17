@@ -86,7 +86,7 @@ const Checkout = () => {
       <Column style={{gap: '1rem'}}>
         <Title style={{color: '#028352'}}>Caixa única</Title>
         <Title style={{fontSize: '0.7rem'}}>É perfeito para pessoas, para o meio ambiente e para os pets!</Title>
-        <Title style={{color: '#028352', fontSize: '1.125rem'}}>R$299,00</Title>
+        <Title style={{color: '#028352', fontSize: '1.125rem'}}>R$ {prices.priceProducts},00</Title>
       </Column></Product>
       <Column>
       {page === 1 ? <UserInfo setPrices={setPrices} prices={prices} count={count} setShipping={setShipping} setForm={setForm} form={form}/> : page === 2 ? <AddressInfo setForm={setForm} form={form}/> : <PaymentInfo />}
