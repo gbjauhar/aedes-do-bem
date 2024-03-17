@@ -12,7 +12,7 @@ import
     ProductResume,
     Row,
     Title } from "./style"
-import box from "../../assets/caixa.png"
+import box from "../../assets/caixa.svg"
 import UserInfo from "../../components/Forms/UserInfo"
 import { useState } from "react"
 import AddressInfo from "../../components/Forms/AddressInfo"
@@ -70,7 +70,7 @@ const Checkout = () => {
     <Product page={page}>
       <Column style={{width: '7rem'}}>
       <BackgroundImage>
-        <img src={box}/>
+        <img src={box} width={60} />
         </BackgroundImage>
         <InputContainer>
         <Button disabled={count === 0} onClick={() => {

@@ -13,7 +13,6 @@ export const Input = styled.input`
   border-radius: 0.125rem;
   border: 1px solid #D3D3D3;
   font-family: "Inter", sans-serif;
-  color: #D4D4D4;
   padding-left: 1rem;
 `
 
