@@ -80,7 +80,6 @@ const Home = () => {
               <InfoBoxSmall>Simples e fácil de usar, mantendo as liberações a cada 28 dias</InfoBoxSmall>
               <InfoBoxSmall>Certificado pela Autoridade regulatória brasileira de Biossegurança - CTNBio</InfoBoxSmall>
               <InfoBoxSmall>Eficácia de 100% no controle da proliferação de fêmeas do Aedes aegypti nas áreas tratadas</InfoBoxSmall>
-              <InfoBoxSmall />
             </div>
           </DivContent>
         </Row>
