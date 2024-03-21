@@ -27,7 +27,7 @@ const Logo = styled.img`
   height: 194px;
   @media (max-width: 500px) {
     width: 203px;
-    height: 118px;
+    height: 100px;
   }
 `;
 
@@ -48,9 +48,9 @@ const CaixasBanner = styled.img`
     top: 7rem;
   }
   @media (max-width: 500px) {
-    top: 7rem;
+    top: 5rem;
     width: 300px;
-    height: 220px;
+    height: 200px;
   }
 `;
 const Header = styled.div<{bannerBox?: boolean, confirm?: boolean}>`
@@ -61,6 +61,11 @@ const Header = styled.div<{bannerBox?: boolean, confirm?: boolean}>`
   display: flex;
   flex-direction: column;
   position: relative;
+  @media (max-width: 500px){
+    border-radius: 0 0 180px 70px;
+    height: ${props => props.bannerBox ? '200px' : ''};
+    min-height: ${props => props.bannerBox ? '220px' : '220px'};
+  }
   @media (max-width: 800px){
     border-radius: 0 0 180px 70px;
     height: ${props => props.bannerBox ? '200px' : ''};
@@ -75,6 +80,11 @@ const HeaderBox = styled.div<{bannerBox?: boolean, confirm?: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 500px){
+    border-radius: 0 0 180px 70px;
+    height: ${props => props.bannerBox ? '80px' : ''};
+    min-height: ${props => props.bannerBox ? '180px' : '180px'};
+  }
   @media (max-width: 800px){
     border-radius: 0 0 180px 70px;
     height: ${props => props.bannerBox ? '80px' : ''};
