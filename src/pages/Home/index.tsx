@@ -215,6 +215,7 @@ const RowScrolling = styled.div`
   padding: 1rem;
   @media (max-width: 800px) {
     flex-wrap: nowrap;
+    margin-bottom: 1rem;
   }
 `
 const Button = styled.a`
