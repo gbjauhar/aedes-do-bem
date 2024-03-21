@@ -18,7 +18,9 @@ import { useState } from "react"
 import AddressInfo from "../../components/Forms/AddressInfo"
 import PaymentInfo from "../../components/Forms/PaymentInfo"
 import HeaderComponent from "../../components/HeaderComponent"
-import { cardTransaction, pixTransaction, postUser } from "../../api/users"
+import { cardTransaction, postUser } from "../../api/users"
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 export interface Form {
   city: string,
@@ -31,7 +33,9 @@ export interface Form {
   phone: string,
   email: string,
   cpf: string,
-  cep: string
+  cep: string,
+  state: string,
+  type: string,
 }
 
 const Checkout = () => {
@@ -50,50 +54,76 @@ const Checkout = () => {
     phone: '',
     email: '',
     cpf: '',
-    cep: ''
+    cep: '',
+    state: '',
+    type: ''
   })
   const [creditCard, setCreditCard] = useState<{
     holderName: string,
     cardNumber: string,
     securityCode: string,
-  } | null>(null)
+    installments: string,
+    date: string,
+  }>({
+    holderName: '',
+    cardNumber: '',
+    securityCode: '',
+    installments: '',
+    date: '',
+  })
 
   const sendInfo = async () => {
     const bodyCredit = {
-      "amount": prices.total,
+      "amount": prices.total * 100,
       "currency": "BRL",
       "description": "venda ",
+      "customer_info": {
+              "first_name": form?.name,
+              "email": form?.email,
+              "phone_number": form?.phone,
+              "taxpayer_id": form?.cpf,
+              "address" : {
+                  "line1": form?.address,
+                  "line2": form?.number,
+                  "line3": form?.complement,
+                  "neighborhood": form?.neighbourhood,
+                  "city": form?.city,
+                  "state": form?.state,
+                  "postal_code": form?.cep,
+                  "country_code": "BR"
+              }
+          },
       "statement_descriptor": "Aedes",
       "payment_type": "credit",
       "capture": true,
       "source": {
         "usage":"single_use",
-          "amount": prices.total,
+          "amount": prices.total * 100,
           "currency": "BRL",
           "type": "card",
           "capture": true,
           "card": {
               "holder_name": creditCard?.holderName,
-              "expiration_month": "01",
-              "expiration_year": "2023",
+              "expiration_month": creditCard?.date.slice(5, 7),
+              "expiration_year": creditCard?.date.slice(2, 4),
               "card_number": creditCard?.cardNumber,
               "security_code": creditCard?.securityCode
           },
           "installment_plan": {
               "mode": "interest_free",
-              "number_installments": "2"
+              "number_installments": creditCard?.installments
           }
       }
   }
 
-    
-    console.log(form)
-    console.log(creditCard)
-    await postUser(form).then(res => console.log(res)).catch(err => console.log(err))
-    if(!creditCard){
-      console.log(creditCard)
+
+    if(form?.type === 'pix'){
+      await postUser(form).then(res => console.log(res)).catch(err => console.log(err))
     } else {
-      await cardTransaction(bodyCredit).then(res => console.log(res)).catch(err => console.log(err))
+      await cardTransaction(bodyCredit).then(async res => {
+        await postUser(form).then(res => console.log(res)).catch(err => console.log(err))
+        console.log(res)
+      }).catch(err => console.log(err))
     }
   }
   
@@ -166,6 +196,7 @@ const Checkout = () => {
    </ProductResume>
    </Column>
     </ContainerInfo>
+    <ToastContainer />
     </Container>
   )
 }

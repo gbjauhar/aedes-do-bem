@@ -28,8 +28,10 @@ const UserInfo = ({ setForm, form, setShipping, setPrices, prices, count }: Prop
     if(cep !== ''){
       await getShipping(cep)
       .then(res => {
+        console.log(res)
         setShipping(res.custom_price)
         setPrices({...prices, total: (count * 299) + Number(res.custom_price)})
+        setForm({...form, state: res.state})
       })
       .catch(err => console.log(err))
     }
