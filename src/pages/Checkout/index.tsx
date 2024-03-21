@@ -19,8 +19,9 @@ import AddressInfo from "../../components/Forms/AddressInfo"
 import PaymentInfo from "../../components/Forms/PaymentInfo"
 import HeaderComponent from "../../components/HeaderComponent"
 import { cardTransaction, postUser } from "../../api/users"
-import { ToastContainer } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom"
 
 export interface Form {
   city: string,
@@ -39,6 +40,7 @@ export interface Form {
 }
 
 const Checkout = () => {
+  const navigate = useNavigate()
   const [count, setCount] = useState(1)
   const [page, setPage] = useState(1)
   const [shipping, setShipping] = useState('0.00')
@@ -73,6 +75,7 @@ const Checkout = () => {
   })
 
   const sendInfo = async () => {
+    console.log(form?.type)
     const bodyCredit = {
       "amount": prices.total * 100,
       "currency": "BRL",
@@ -118,10 +121,22 @@ const Checkout = () => {
 
 
     if(form?.type === 'pix'){
-      await postUser(form).then(res => console.log(res)).catch(err => console.log(err))
-    } else {
+      await postUser(form).then(res => {
+        console.log(res)
+        navigate("/confirm")
+      }).catch(err => {
+        console.log(err)
+        toast.error("Ocorreu um erro, tente novamente")
+      })
+    } else if(form?.type === 'credit') {
       await cardTransaction(bodyCredit).then(async res => {
-        await postUser(form).then(res => console.log(res)).catch(err => console.log(err))
+        await postUser(form).then(res => {
+          console.log(res)
+          navigate("/confirm")
+        }).catch(err => {
+          console.log(err)
+          toast.error("Ocorreu um erro, tente novamente")
+        })
         console.log(res)
       }).catch(err => console.log(err))
     }
@@ -192,7 +207,7 @@ const Checkout = () => {
       <Title>Total</Title>
       <Title style={{fontSize: '1.125rem', color: "#028352"}}>R$ {prices.total}</Title>
     </Row>
-    <ButtonNext onClick={nextPage}>Continuar</ButtonNext>
+    <ButtonNext onClick={nextPage}>{page === 3 ? 'Finalizar': 'Continuar'}</ButtonNext>
    </ProductResume>
    </Column>
     </ContainerInfo>

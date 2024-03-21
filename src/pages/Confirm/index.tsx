@@ -1,8 +1,8 @@
 import
-  { Container, 
+  { Container, Content, Subtitle, Title, 
   } from "./style"
 import HeaderComponent from "../../components/HeaderComponent"
-
+import confirm from "../../assets/confirm.svg"
 export interface Form {
   city: string,
   neighbourhood: string,
@@ -23,7 +23,12 @@ const Confirm = () => {
 
   return(
     <Container>
-    <HeaderComponent />
+    <HeaderComponent confirm />
+    <Content>
+      <img src={confirm} />
+      <Title>Compra realizada com sucesso!</Title>
+      <Subtitle>Entraremos em contato para mais informações sobre a entrega e demais informações</Subtitle>
+    </Content>
     
     </Container>
   )
