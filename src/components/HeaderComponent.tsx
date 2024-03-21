@@ -46,10 +46,9 @@ const CaixasBanner = styled.img`
     top: 7rem;
   }
   @media (max-width: 500px) {
-    position: initial;
-    margin-left: -3rem;
-    width: 250px;
-    height: 196px;
+    top: 7rem;
+    width: 300px;
+    height: 220px;
   }
 `;
 const Header = styled.div<{bannerBox?: boolean}>`

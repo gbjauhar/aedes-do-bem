@@ -1,16 +1,31 @@
+import { pixTransaction } from "../../api/users"
 import { Column, ContainerForm, Input, Label, MockPic, PaymentContainer, Row, Title } from "./style"
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 
-const PaymentInfo = () => {
+const PaymentInfo = ({setForm, form, creditCard, setCreditCard, prices}) => {
 
-  const [type, setType] = useState('pix')
+  const [type, setType] = useState('')
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCreditCard({...creditCard, [e.target.name]: e.target.value})
+  }
 
+  const clickPix = async () => {
+    const bodyPix = {
+      "amount": prices.total,
+      "currency": "BRL",
+      "description": "venda de PIX",
+      "statement_descriptor": "AEDES",
+      "payment_type": "pix"
+  }
+    await pixTransaction(bodyPix).then(res => console.log(res)).catch(err => console.log(err))
+    setType('pix')
+  }
 
   return (
     <ContainerForm style={{alignItems: 'center'}}>
       <Title>Dados de Pagamento</Title>
-      <PaymentContainer onClick={() => setType('pix')}>
+      <PaymentContainer onClick={clickPix}>
         <MockPic />
         <p>Pix</p>
       </PaymentContainer>
@@ -20,9 +35,17 @@ const PaymentInfo = () => {
       </PaymentContainer>
       {type === 'credit' ?  <ContainerForm>
         <Label>Nome impresso no cartão</Label>
-        <Input />
+        <Input 
+            onChange={handleChange}
+            name="holderName"
+            value={creditCard?.holderName}
+          />
         <Label>Número do cartão</Label>
-        <Input />
+        <Input 
+            onChange={handleChange}
+            name="cardNumber"
+            value={creditCard?.cardNumber}
+          />
         <Row>
           <Column>
         <Label>Vencimento</Label>
@@ -30,7 +53,12 @@ const PaymentInfo = () => {
       </Column>
       <Column>
         <Label>CVV</Label>
-        <Input  style={{width: '5.3rem'}}/>
+        <Input 
+        style={{width: '5.3rem'}}
+            onChange={handleChange}
+            name="securityCode"
+            value={creditCard?.securityCode}
+          />
         </Column>
         <Column>
         <Label>Parcelamento</Label>
@@ -38,7 +66,8 @@ const PaymentInfo = () => {
         </Column>
         </Row>
       </ContainerForm>
-      : <></>}
+      : type === 'pix' ?
+      <Input /> : <></>}
      
       </ContainerForm>
   )

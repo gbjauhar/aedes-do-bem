@@ -18,7 +18,7 @@ import { useState } from "react"
 import AddressInfo from "../../components/Forms/AddressInfo"
 import PaymentInfo from "../../components/Forms/PaymentInfo"
 import HeaderComponent from "../../components/HeaderComponent"
-import { postUser } from "../../api/users"
+import { cardTransaction, pixTransaction, postUser } from "../../api/users"
 
 export interface Form {
   city: string,
@@ -30,7 +30,8 @@ export interface Form {
   name: string,
   phone: string,
   email: string,
-  cpf: string
+  cpf: string,
+  cep: string
 }
 
 const Checkout = () => {
@@ -48,11 +49,52 @@ const Checkout = () => {
     name: '',
     phone: '',
     email: '',
-    cpf: ''
+    cpf: '',
+    cep: ''
   })
+  const [creditCard, setCreditCard] = useState<{
+    holderName: string,
+    cardNumber: string,
+    securityCode: string,
+  } | null>(null)
 
   const sendInfo = async () => {
+    const bodyCredit = {
+      "amount": prices.total,
+      "currency": "BRL",
+      "description": "venda ",
+      "statement_descriptor": "Aedes",
+      "payment_type": "credit",
+      "capture": true,
+      "source": {
+        "usage":"single_use",
+          "amount": prices.total,
+          "currency": "BRL",
+          "type": "card",
+          "capture": true,
+          "card": {
+              "holder_name": creditCard?.holderName,
+              "expiration_month": "01",
+              "expiration_year": "2023",
+              "card_number": creditCard?.cardNumber,
+              "security_code": creditCard?.securityCode
+          },
+          "installment_plan": {
+              "mode": "interest_free",
+              "number_installments": "2"
+          }
+      }
+  }
+
+    
+    console.log(form)
+    console.log(creditCard)
     await postUser(form).then(res => console.log(res)).catch(err => console.log(err))
+    if(!creditCard){
+      console.log(creditCard)
+    } else {
+      await cardTransaction(bodyCredit).then(res => console.log(res)).catch(err => console.log(err))
+    }
   }
   
   const nextPage = () => {
@@ -92,7 +134,18 @@ const Checkout = () => {
         <Title style={{color: '#028352', fontSize: '1.125rem'}}>R$ {prices.priceProducts},00</Title>
       </Column></Product>
       <Column>
-      {page === 1 ? <UserInfo setPrices={setPrices} prices={prices} count={count} setShipping={setShipping} setForm={setForm} form={form}/> : page === 2 ? <AddressInfo setForm={setForm} form={form}/> : <PaymentInfo />}
+      {page === 1 ? 
+        <UserInfo 
+          setPrices={setPrices}
+          prices={prices}
+          count={count}
+          setShipping={setShipping}
+          setForm={setForm}
+          form={form}
+        /> :
+      page === 2 ?
+        <AddressInfo setForm={setForm} form={form}/> : 
+        <PaymentInfo prices={prices} setForm={setForm} form={form} creditCard={creditCard} setCreditCard={setCreditCard}/>}
    
    <ProductResume>
     <Title>Resumo do pedido</Title>

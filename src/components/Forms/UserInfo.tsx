@@ -24,12 +24,16 @@ const UserInfo = ({ setForm, form, setShipping, setPrices, prices, count }: Prop
   }
 
   const getShippingAPI = async () => {
-    await getShipping(cep)
+    setForm({...form, cep: cep})
+    if(cep !== ''){
+      await getShipping(cep)
       .then(res => {
         setShipping(res.custom_price)
         setPrices({...prices, total: (count * 299) + Number(res.custom_price)})
       })
       .catch(err => console.log(err))
+    }
+   
   }
   return (
     <ContainerForm>

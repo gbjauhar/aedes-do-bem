@@ -20,3 +20,23 @@ export async function postUser(body: Form) {
     console.log(err)
   }
 }
+
+export async function cardTransaction(body) {
+  try {
+    const data = await instance.post("/card", body)
+
+    return data
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export async function pixTransaction(body) {
+  try {
+    const data = await instance.post("/pix", body)
+
+    return data
+  } catch (err) {
+    console.log(err)
+  }
+}
