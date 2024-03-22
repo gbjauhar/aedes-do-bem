@@ -146,3 +146,10 @@ export const Divisor = styled.div`
   margin: 0.5rem 0;
 `
 
+export const ImageWhatsapp = styled.img`
+  position: fixed;
+  z-index: 99999;
+  bottom: 15px;
+  right: 15px;
+  width: 3rem;
+`

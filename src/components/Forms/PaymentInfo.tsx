@@ -75,11 +75,15 @@ const PaymentInfo = ({form, setForm, creditCard, setCreditCard, prices}: Props) 
       "payment_type": "pix"
   }
     await pixTransaction(bodyPix).then(async res => {
-      await generateQRCode(res?.payment_method?.qr_code?.emv).then(data => {
-        setQrCode(data)
-        setForm({...form, type: 'pix'})
-        setLoading(false)
-      })
+      if(res.status !== "failed") {
+        await generateQRCode(res?.payment_method?.qr_code?.emv).then(data => {
+          setQrCode(data)
+          setForm({...form, type: 'pix'})
+          setLoading(false)
+        })
+      } else {
+        toast.error("Ocorreu um erro, tente novamente")
+      }
       
     }).catch(err => {
       toast.error("Ocorreu um erro, tente novamente")

@@ -37,3 +37,11 @@ text-align: center;
 color: #BEBEBE;
 
 `
+
+export const ImageWhatsapp = styled.img`
+  position: fixed;
+  z-index: 99999;
+  bottom: 15px;
+  right: 15px;
+  width: 3rem;
+`

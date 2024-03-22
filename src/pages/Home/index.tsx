@@ -12,8 +12,10 @@ import biggerVertical from "../../assets/biggerVertical.svg"
 import logoOxitec from "../../assets/logoOxitec.svg"
 import newImage from "../../assets/newImage.svg"
 import footer from "../../assets/footer.svg";
+import whatsapp from "../../assets/whatsapp.svg";
+import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ whatsAppLink }: { whatsAppLink: string }) => {
   return (
     <Container>
       <HeaderComponent BannerBox={true} />
@@ -21,7 +23,7 @@ const Home = () => {
         <Title>É o mosquito combatendo o mosquito!</Title>
         <Subtitle>Uma solução inovadora, segura e altamente eficaz no combate ao Aedes aegypti.</Subtitle>
         <Video width={700} autoPlay controls muted>
-          <source src={import.meta.env.VITE_FRONTEND_URL + '/video.mp4'} type="video/mp4" />
+          <source src={import.meta.env.VITE_FRONTEND_URL + '/video-home.mp4'} type="video/mp4" />
           Your browser does not support the video tag.
         </Video>
         <img src={icone} width={80} />
@@ -113,6 +115,9 @@ const Home = () => {
         </FooterTitle>
         <Button style={{background: 'linear-gradient(122.45deg, #067474 26.86%, #58A08B 73.14%)',  marginTop: '3rem'}}>Conversar com um especialista!</Button>
       </DivBackground>
+      <Link to={whatsAppLink}>
+        <ImageWhatsapp src={whatsapp} />
+      </Link>
     </Container>
   );
 };
@@ -304,6 +309,18 @@ const NewText = styled.div`
     font-weight: 300;
     color: #000000;
   }
+
+  @media (max-width: 800px) {
+    margin: 7rem 0 2rem;
+  }
+`
+
+const ImageWhatsapp = styled.img`
+  position: fixed;
+  z-index: 99999;
+  bottom: 15px;
+  right: 15px;
+  width: 3rem;
 `
 
 export default Home;

@@ -6,6 +6,7 @@ import
     Container, 
     ContainerInfo,
     Divisor,
+    ImageWhatsapp,
     Input,
     InputContainer,
     Product,
@@ -23,6 +24,8 @@ import { cardTransaction, postUser } from "../../api/users"
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom"
+import whatsapp from "../../assets/whatsapp.svg";
+import { Link } from "react-router-dom";
 
 export interface Form {
   city: string,
@@ -40,7 +43,7 @@ export interface Form {
   type: string,
 }
 
-const Checkout = () => {
+const Checkout = ({ whatsAppLink }: { whatsAppLink: string }) => {
   const navigate = useNavigate()
   const [count, setCount] = useState(1)
   const [page, setPage] = useState(1)
@@ -213,6 +216,9 @@ const Checkout = () => {
    </Column>
     </ContainerInfo>
     <ToastContainer />
+    <Link to={whatsAppLink}>
+        <ImageWhatsapp src={whatsapp} />
+      </Link>
     </Container>
   )
 }

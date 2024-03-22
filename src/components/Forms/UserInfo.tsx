@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react"
 import { Form } from "../../pages/Checkout"
 import { Button, ContainerForm, Input, Label, Row } from "./style"
 import { getShipping } from "../../api/users"
+import { toast } from "react-toastify"
+import { ThreeDots } from "react-loader-spinner"
 
 interface Props {
    form: Form,
@@ -22,8 +24,10 @@ const UserInfo = ({ setForm, form, setShipping, setPrices, prices, count }: Prop
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({...form, [e.target.name]: e.target.value})
   }
+  const [loading, setLoading] = useState(false)
 
   const getShippingAPI = async () => {
+    setLoading(true)
     setForm({...form, cep: cep})
     if(cep !== ''){
       await getShipping(cep)
@@ -32,8 +36,13 @@ const UserInfo = ({ setForm, form, setShipping, setPrices, prices, count }: Prop
         setShipping(res.custom_price)
         setPrices({...prices, total: (count * 299) + Number(res.custom_price)})
         setForm({...form, state: res.state})
+        setLoading(false)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        toast.error("Ocorreu um erro, tente novamente")
+        setLoading(false)
+        console.log(err)
+      })
     }
    
   }
@@ -77,7 +86,17 @@ const UserInfo = ({ setForm, form, setShipping, setPrices, prices, count }: Prop
         value={cep}
         name="cep"
       />
-      <Button onClick={getShippingAPI}>Calcular</Button>
+      <Button onClick={getShippingAPI} disabled={loading}> {loading ? 
+          <ThreeDots
+          visible={true}
+            height="80"
+            width="80"
+            color="#4fa94d"
+            radius="9"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          /> : 'Calcular'}</Button>
       </Row>
       </ContainerForm>
   )

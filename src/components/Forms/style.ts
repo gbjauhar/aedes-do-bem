@@ -86,7 +86,10 @@ export const Button = styled.button`
   font-family: "Inter", sans-serif;
   font-weight: 600;
   color: #FFFFFF;
-  cursor: pointer;
+  cursor: ${props => props.disabled ? 'default' : 'pointer'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 export const Select = styled.select`

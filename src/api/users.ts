@@ -23,6 +23,7 @@ interface Pix {
       "emv": string
     }
   },
+  "status"?: string
 }
 
 interface CreditBody {

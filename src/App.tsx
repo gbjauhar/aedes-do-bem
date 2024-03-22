@@ -5,13 +5,15 @@ import Home from './pages/Home'
 import Confirm from './pages/Confirm'
 
 function App() {
-
+  const whatsAppLink = window.innerWidth < 800
+  ? "https://wa.me/556281602618"
+  : "https://web.whatsapp.com/send/?phone=556281602618&text&type=phone_number&app_absent=0";
   return (
     <BrowserRouter>
     <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="checkout" element={<Checkout/>}/>
-        <Route path="confirm" element={<Confirm/>}/>
+        <Route path="/" element={<Home whatsAppLink={whatsAppLink} />} />
+        <Route path="checkout" element={<Checkout whatsAppLink={whatsAppLink} />}/>
+        <Route path="confirm" element={<Confirm whatsAppLink={whatsAppLink} />}/>
     </Routes>
 </BrowserRouter>
   )
