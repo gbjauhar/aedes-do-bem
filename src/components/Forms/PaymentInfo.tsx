@@ -82,6 +82,7 @@ const PaymentInfo = ({form, setForm, creditCard, setCreditCard, prices}: Props) 
           setLoading(false)
         })
       } else {
+        setLoading(false)
         toast.error("Ocorreu um erro, tente novamente")
       }
       
