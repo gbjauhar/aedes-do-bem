@@ -2,8 +2,6 @@ import styled from "styled-components";
 import HeaderComponent from "../../components/HeaderComponent";
 import icone from "../../assets/icone-mosquitos.svg"
 import fluxograma from "../../assets/fluxograma.svg"
-import logoBackground from "../../assets/logoBackground.svg"
-import marketing from "../../assets/marketing.svg"
 import background from "../../assets/background.svg"
 import box from "../../assets/caixa.svg"
 import leticia from "../../assets/leticia.svg"
@@ -12,6 +10,7 @@ import emerson from "../../assets/emerson.svg"
 import backgroundBigger from "../../assets/backgroundBigger.svg"
 import biggerVertical from "../../assets/biggerVertical.svg"
 import logoOxitec from "../../assets/logoOxitec.svg"
+import newImage from "../../assets/newImage.svg"
 import footer from "../../assets/footer.svg";
 
 const Home = () => {
@@ -22,7 +21,7 @@ const Home = () => {
         <Title>É o mosquito combatendo o mosquito!</Title>
         <Subtitle>Uma solução inovadora, segura e altamente eficaz no combate ao Aedes aegypti.</Subtitle>
         <Video width={700} autoPlay controls muted>
-          <source src={import.meta.env.VITE_FRONTEND_URL + '/video.MP4'} type="video/mp4" />
+          <source src={import.meta.env.VITE_FRONTEND_URL + '/video.mp4'} type="video/mp4" />
           Your browser does not support the video tag.
         </Video>
         <img src={icone} width={80} />
@@ -42,8 +41,28 @@ const Home = () => {
             <Button href="/checkout">Proteja sua família agora!</Button>
           </ContentBox>
         </Row>
-        <Image src={marketing} style={{ width: '50%', marginTop: '10rem'}}/>
-        <Image src={logoBackground}/>
+        <NewText>
+          <h1>Uma solução inovadora, segura e altamente eficaz no combate ao Aedes aegypti.</h1>
+          <p>O Aedes do Bem™ MINI é uma versão com menor dosagem de mosquitos, suficiente para proteger uma residência ou pequenos estabelecimentos comerciais.</p>
+          <p>Os Aedes do Bem™ são mosquitos Aedes aegypti machos autolimitante, desenvolvidos pela empresa britânica Oxitec, que são capazes de limitar a reprodução da própria espécie, ajudando na diminuição de fêmeas na área tratada.</p>
+          <p>As fêmeas do Aedes aegypti que picam, pois precisam de sangue para maturar seus ovos, e nessa picada, se estiverem contaminadas, transmitem o vírus da dengue, zika, chikungunya, febre amarela e outras doenças perigosas.</p>
+          <p>Os Aedes do Bem™ são machos, e assim como os machos dessa espécie, não picam e não transmitem doenças. Eles se alimentam de néctar das flores e, por isso, são mosquitos inofensivos aos serem humanos e pets.</p>
+          <h1>São mosquitos do Bem combatendo mosquitos!</h1>
+          <h1>Como funciona?</h1>
+          <p>Você receberá sua Caixa do Bem MINI, contendo um pote de ovos do Aedes do Bem™, suporte plástico e conservantes e condicionantes de água.</p>
+          <p>Ao ativar sua caixinha adicionando água potável, os mosquitos do Bem se desenvolverão até a atingir a fase adulta. Em cerca de 10 a 14 dias, Aedes do Bem™ adultos voarão da caixa para o ambiente urbano para se acasalar com as fêmeas do Aedes aegypti.</p>
+          <p>Deste cruzamento, apenas novos mosquitos machos autolimitantes e inofensivos serão gerados. As fêmeas dessa prole não sobrevivem até a fase adulta.</p>
+          <h1>E qual é o resultado do tratamento?</h1>
+          <p>O resultado é a diminuição do número de fêmeas do Aedes aegypti, que picam e transmitem doenças, e, consequentemente, o controle populacional do Aedes aegypti na área tratada.</p>
+          <p>Lembrando que os Aedes do Bem™ não causam danos ou desequilíbrio ao meio ambiente, não interferem em outros insetos e plantas benéficas.</p>
+          <h1>Recomendações de uso do produto:</h1>
+          <p>Assim que receber sua Caixa do Bem MINI, ative-a imediatamente.</p>
+          <p>Use o aplicativo para registrar a ativação da sua Caixa do Bem MINI e receba lembretes da sua nova ativação.</p>
+          <p>Ao finalizar a ativação, posicione sua Caixa do Bem MINI em uma área externa, como quintais ou jardins, em um local com sombra, sem incidência de luz natural direta ou fontes de calor.</p>
+          <p>{'Não exponha o produto em altas temperaturas (> 30°C).'}</p>
+          <p style={{fontWeight: 400}}>ANTES DE USAR, LEIA AS INSTRUÇÕES DE USO CONTIDAS NA EMBALAGEM.</p>
+          <img src={newImage} />
+        </NewText>
         <RowScrolling>
           <InfoBox>
             <img src={leticia} />
@@ -265,6 +284,26 @@ const DivBackground = styled.div`
 
 const Video = styled.video`
 width: 100%;
+`
+
+const NewText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 16px;
+  margin: 5rem 0 2rem;
+  h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #000000;
+    margin-top: 2rem;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: #000000;
+  }
 `
 
 export default Home;

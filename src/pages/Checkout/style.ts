@@ -28,12 +28,13 @@ export const ContainerInfo = styled.div`
   width: 70%;
   display: flex;
   justify-content: space-around;
-  margin-top: 5rem;
+  margin-top: 15rem;
   @media (max-width: 800px) {
     flex-direction: column;
     width: 100%;
     align-items: center;
     justify-content: center;
+    margin-top: 6rem;
   }
 `
 
@@ -144,3 +145,4 @@ export const Divisor = styled.div`
   background-color: #DBDBDB;
   margin: 0.5rem 0;
 `
+

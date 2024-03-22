@@ -7,14 +7,19 @@ import React from "react";
 type HeaderComponentProps = {
   BannerBox?: boolean;
   confirm?: boolean;
+  VideoShow?: boolean;
 };
 
-const HeaderComponent: React.FC<HeaderComponentProps> = ({ BannerBox, confirm }) => {
+const HeaderComponent: React.FC<HeaderComponentProps> = ({ BannerBox, confirm, VideoShow }) => {
   return (
     <Header confirm={confirm} bannerBox={BannerBox}>
       <HeaderBox confirm={confirm} bannerBox={BannerBox}>
         <Logo src={confirm ? logoWhite : logo} />
         {BannerBox && <CaixasBanner src={caixasBanner} />}
+        {VideoShow && <Video width={700} autoPlay controls muted>
+        <source src={import.meta.env.VITE_FRONTEND_URL + '/video-checkout.mp4'} type="video/mp4" />
+        Your browser does not support the video tag.
+      </Video>}
       </HeaderBox>
     </Header>
   );
@@ -91,3 +96,13 @@ const HeaderBox = styled.div<{bannerBox?: boolean, confirm?: boolean}>`
     min-height: ${props => props.bannerBox ? '' : '180px'};
   }
 `;
+
+const Video = styled.video`
+width: 40%;
+position: absolute;
+top: 12rem;
+@media (max-width: 800px) {
+  width: 70%;
+  top: 7rem;
+}
+`

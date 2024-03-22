@@ -11,7 +11,8 @@ import
     Product,
     ProductResume,
     Row,
-    Title } from "./style"
+    Title
+  } from "./style"
 import box from "../../assets/caixa.svg"
 import UserInfo from "../../components/Forms/UserInfo"
 import { useState } from "react"
@@ -152,7 +153,7 @@ const Checkout = () => {
 
   return(
     <Container>
-    <HeaderComponent />
+    <HeaderComponent VideoShow />
     <ContainerInfo>
     <Product page={page}>
       <Column style={{width: '7rem'}}>
