@@ -68,12 +68,10 @@ export const PaymentContainer = styled.button`
   }
 `
 
-export const MockPic = styled.div`
-  width: 2rem;
+export const MockPic = styled.img`
+  width: 1.5rem;
   height: 1.75rem;
-  background-color: #EEEEEE;
-  box-shadow: 0px 0px 4px 0px #00000040;
-  border-radius: 0.625rem;
+
 `
 
 export const Button = styled.button`

@@ -6,6 +6,8 @@ import { Form } from "../../pages/Checkout";
 import QRCode from "qrcode";
 import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import pix from "../../assets/pix.svg"
+import credit from "../../assets/credit.svg"
 
 interface Props {
   creditCard: {
@@ -111,13 +113,13 @@ const PaymentInfo = ({form, setForm, creditCard, setCreditCard, prices}: Props) 
             wrapperClass=""
           /> : 
           <>
-            <MockPic />
+            <MockPic src={pix} />
             <p>Pix</p>
           </>}
         
       </PaymentContainer>
       <PaymentContainer disabled={loading}  onClick={() => setForm({...form, type: 'credit'})}>
-        <MockPic />
+        <MockPic src={credit} />
         <p>Cartão de Crédito</p>
       </PaymentContainer>
       {form?.type === 'credit' ?  <ContainerForm>
