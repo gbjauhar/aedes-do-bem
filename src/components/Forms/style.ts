@@ -109,6 +109,7 @@ export const ButtonCopy = styled.button`
   font-size: 12px;
   font-weight: 600;
   border: none;
+  cursor: pointer;
 `
 
 export const Subtitle = styled.p`

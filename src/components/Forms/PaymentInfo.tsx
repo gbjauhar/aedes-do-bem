@@ -34,6 +34,7 @@ setForm: React.Dispatch<React.SetStateAction<Form>>
 const PaymentInfo = ({form, setForm, creditCard, setCreditCard, prices}: Props) => {
 
   const [loading, setLoading] = useState(false)
+  const [qrCodeImage, setQrCodeImage] = useState('')
   const [qrCode, setQrCode] = useState('')
 
   const options = [
@@ -78,9 +79,9 @@ const PaymentInfo = ({form, setForm, creditCard, setCreditCard, prices}: Props) 
   }
     await pixTransaction(bodyPix).then(async res => {
       if(res.status !== "failed") {
-        console.log(res)
+        setQrCode(res?.payment_method?.qr_code?.emv)
         await generateQRCode(res?.payment_method?.qr_code?.emv).then(data => {
-          setQrCode(data)
+          setQrCodeImage(data)
           setForm({...form, type: 'pix'})
           setLoading(false)
         })
@@ -170,9 +171,12 @@ const PaymentInfo = ({form, setForm, creditCard, setCreditCard, prices}: Props) 
         style={{width: '13rem', height: '2.2rem', borderRadius: '0.625rem'}}
         value={qrCode}
       />
-      <ButtonCopy onClick={() => navigator.clipboard.writeText(qrCode)}>copiar</ButtonCopy>
+      <ButtonCopy onClick={() => {
+        navigator.clipboard.writeText(qrCode)
+        toast.success("Copiado para a área de transferência!")
+      }}>copiar</ButtonCopy>
       </Row>
-      <img src={qrCode} />
+      <img src={qrCodeImage} />
       <Subtitle>Acesse o aplicativo do seu banco e realize o <br/>pagamento através dos dados desse QRCODE!</Subtitle>
       </>
        : <></>}
