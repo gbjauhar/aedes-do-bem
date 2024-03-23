@@ -81,7 +81,7 @@ const Checkout = ({ whatsAppLink }: { whatsAppLink: string }) => {
   const sendInfo = async () => {
     console.log(form?.type)
     const bodyCredit = {
-      "amount": prices.total * 100,
+      "amount": (prices.total * 100).toString(),
       "currency": "BRL",
       "description": "venda ",
       "customer_info": {

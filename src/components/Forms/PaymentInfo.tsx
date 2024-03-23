@@ -68,7 +68,7 @@ const PaymentInfo = ({form, setForm, creditCard, setCreditCard, prices}: Props) 
   const clickPix = async () => {
     setLoading(true)
     const bodyPix = {
-      "amount": prices.total * 100,
+      "amount": (prices.total * 100).toString(),
       "currency": "BRL",
       "description": "venda de PIX",
       "statement_descriptor": "AEDES",
@@ -76,6 +76,7 @@ const PaymentInfo = ({form, setForm, creditCard, setCreditCard, prices}: Props) 
   }
     await pixTransaction(bodyPix).then(async res => {
       if(res.status !== "failed") {
+        console.log(res)
         await generateQRCode(res?.payment_method?.qr_code?.emv).then(data => {
           setQrCode(data)
           setForm({...form, type: 'pix'})

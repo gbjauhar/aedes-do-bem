@@ -27,7 +27,7 @@ interface Pix {
 }
 
 interface CreditBody {
-  "amount": number,
+  "amount": string,
   "currency": string,
   "description": string,
   "customer_info": {
@@ -70,7 +70,7 @@ interface CreditBody {
 }
 
 interface PixBody  {
-  "amount": number,
+  "amount": string,
   "currency": string,
   "description": string,
   "statement_descriptor": string,
