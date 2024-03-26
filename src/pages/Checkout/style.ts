@@ -34,7 +34,7 @@ export const ContainerInfo = styled.div`
     width: 100%;
     align-items: center;
     justify-content: center;
-    margin-top: 6rem;
+    margin-top: 8rem;
   }
 `
 
