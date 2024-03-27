@@ -48,7 +48,7 @@ const Checkout = ({ whatsAppLink }: { whatsAppLink: string }) => {
   const [count, setCount] = useState(1)
   const [page, setPage] = useState(1)
   const [shipping, setShipping] = useState('0.00')
-  const [prices, setPrices] = useState({ priceProducts: 299, total: 299})
+  const [prices, setPrices] = useState({ priceProducts: 280, total: 280})
   const [form, setForm] = useState<Form>({
     city: '',
     neighbourhood: '',
@@ -166,15 +166,15 @@ const Checkout = ({ whatsAppLink }: { whatsAppLink: string }) => {
         <InputContainer>
         <Button disabled={count === 0} onClick={() => {
           setCount(count -1)
-          setPrices({total: ((count -1)  * 299) + Number(shipping), priceProducts: (count -1) * 299})
+          setPrices({total: ((count -1)  * 280) + Number(shipping), priceProducts: (count -1) * 280})
         }}>-</Button>
         <Input onChange={(e) => {
           setCount(Number(e.target.value))
-          setPrices({total: (Number(e.target.value)  * 299) + Number(shipping), priceProducts: Number(e.target.value) * 299})
+          setPrices({total: (Number(e.target.value)  * 280) + Number(shipping), priceProducts: Number(e.target.value) * 280})
         }} value={count} />
         <Button onClick={() => {
           setCount(count +1)
-          setPrices({total: ((count +1)  * 299) + Number(shipping), priceProducts: (count +1) * 299})
+          setPrices({total: ((count +1)  * 280) + Number(shipping), priceProducts: (count +1) * 280})
         }}>+</Button></InputContainer>
       </Column>
       <Column style={{gap: '1rem'}}>

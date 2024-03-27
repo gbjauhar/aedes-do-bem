@@ -34,7 +34,7 @@ const UserInfo = ({ setForm, form, setShipping, setPrices, prices, count }: Prop
       .then(res => {
         console.log(res)
         setShipping(res.custom_price)
-        setPrices({...prices, total: (count * 299) + Number(res.custom_price)})
+        setPrices({...prices, total: (count * 280) + Number(res.custom_price)})
         setForm({...form, state: res.state})
         setLoading(false)
       })

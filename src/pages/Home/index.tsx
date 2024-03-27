@@ -39,7 +39,7 @@ const Home = ({ whatsAppLink }: { whatsAppLink: string }) => {
           <ContentBox>
             <Title style={{fontWeight: 600, fontSize: '1rem'}}>Caixa única</Title>
             <img src={box} width={130} />
-            <Title style={{fontSize: '1rem'}}>R$ 299,00</Title>
+            <Title style={{fontSize: '1rem'}}>R$ 280,00</Title>
             <Button href="/checkout">Proteja sua família agora!</Button>
           </ContentBox>
         </Row>
