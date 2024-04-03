@@ -14,10 +14,18 @@ import newImage from "../../assets/newImage.svg"
 import footer from "../../assets/footer.svg";
 import whatsapp from "../../assets/whatsapp.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = ({ whatsAppLink }: { whatsAppLink: string }) => {
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    window.dataLayer.push({
+      event: 'pageview'
+    })
+    window.fbq('track', 'pageview')
+  }), []
 
   const tracking = () => {
     window.dataLayer.push({
