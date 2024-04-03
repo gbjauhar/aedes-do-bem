@@ -13,9 +13,20 @@ import logoOxitec from "../../assets/logoOxitec.svg"
 import newImage from "../../assets/newImage.svg"
 import footer from "../../assets/footer.svg";
 import whatsapp from "../../assets/whatsapp.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = ({ whatsAppLink }: { whatsAppLink: string }) => {
+
+  const navigate = useNavigate()
+
+  const tracking = () => {
+    window.dataLayer.push({
+      event: 'Clicou para comprar a caixa'
+    })
+    window.fbq('track', 'Clicou para comprar a caixa')
+
+    navigate("/checkout")
+  }
   return (
     <Container>
       <HeaderComponent BannerBox={true} />
@@ -40,7 +51,7 @@ const Home = ({ whatsAppLink }: { whatsAppLink: string }) => {
             <Title style={{fontWeight: 600, fontSize: '1rem'}}>Caixa única</Title>
             <img src={box} width={130} />
             <Title style={{fontSize: '1rem'}}>R$ 280,00</Title>
-            <Button href="/checkout">Proteja sua família agora!</Button>
+            <Button onClick={tracking}>Proteja sua família agora!</Button>
           </ContentBox>
         </Row>
         <NewText>

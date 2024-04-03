@@ -26,6 +26,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom"
 import whatsapp from "../../assets/whatsapp.svg";
 import { Link } from "react-router-dom";
+import 'vite-plugin-radar';
 
 export interface Form {
   city: string,
@@ -79,6 +80,7 @@ const Checkout = ({ whatsAppLink }: { whatsAppLink: string }) => {
   })
 
   const sendInfo = async () => {
+
     console.log(form?.type)
     const bodyCredit = {
       "amount": (prices.total * 100).toString(),
@@ -127,6 +129,10 @@ const Checkout = ({ whatsAppLink }: { whatsAppLink: string }) => {
     if(form?.type === 'pix'){
       await postUser(form).then(res => {
         console.log(res)
+        window.dataLayer.push({
+          event: 'Finalizou compra no pix'
+        })
+        window.fbq('track', 'Finalizou compra no pix')
         navigate("/confirm")
       }).catch(err => {
         console.log(err)
@@ -136,6 +142,10 @@ const Checkout = ({ whatsAppLink }: { whatsAppLink: string }) => {
       await cardTransaction(bodyCredit).then(async res => {
         await postUser(form).then(res => {
           console.log(res)
+          window.dataLayer.push({
+            event: 'Finalizou compra no crédito'
+          })
+          window.fbq('track', 'Finalizou compra no crédito')
           navigate("/confirm")
         }).catch(err => {
           console.log(err)
