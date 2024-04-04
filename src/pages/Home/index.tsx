@@ -132,7 +132,15 @@ const Home = ({ whatsAppLink }: { whatsAppLink: string }) => {
           em soluções biológicas disruptivas e inovadoras para o controle de insetos que transmitem
           doenças e destroem plantações.
         </FooterTitle>
-        <Button style={{background: 'linear-gradient(122.45deg, #067474 26.86%, #58A08B 73.14%)',  marginTop: '3rem'}}>Conversar com um especialista!</Button>
+        <Link to={whatsAppLink} style={{textDecoration: 'none'}}>
+          <Button
+            style={{
+              background: 'linear-gradient(122.45deg, #067474 26.86%, #58A08B 73.14%)', 
+              marginTop: '3rem',
+            }}>
+              Conversar com um especialista!
+          </Button>
+        </Link>
       </DivBackground>
       <Link to={whatsAppLink}>
         <ImageWhatsapp src={whatsapp} />

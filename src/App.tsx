@@ -6,8 +6,8 @@ import Confirm from './pages/Confirm'
 
 function App() {
   const whatsAppLink = window.innerWidth < 800
-  ? "https://wa.me/556281602618"
-  : "https://web.whatsapp.com/send/?phone=556281602618&text&type=phone_number&app_absent=0";
+  ? "https://wa.me/6499299158"
+  : "https://web.whatsapp.com/send/?phone=6499299158&text&type=phone_number&app_absent=0";
   return (
     <BrowserRouter>
     <Routes>
